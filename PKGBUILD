@@ -1,16 +1,18 @@
 # Maintainer: Samuel Mesa <samuelmesa@gmail.com>
 # based on script by: Johannes Löthberg <johannes@kyriasis.com>
 
-pkgname=python-mapnik
+pkgname=python-mapnik-proj
 pkgver=3.0.16
-pkgrel=3
+pkgrel=2
 
-pkgdesc="Python3 bindings for Mapnik"
+pkgdesc="Python3 bindings for Mapnik with Proj support"
 url="https://github.com/mapnik/python-mapnik"
 arch=('any')
 license=('LGPL')
+provides=('python-mapnik=3.0.16')
+conflicts=('python-mapnik')
 
-depends=('python' 'mapnik' 'python-cairo' 'python-pyarrow' 'python-pypdf2')
+depends=('python' 'mapnik-3.1-proj' 'python-cairo' 'python-pyarrow' 'python-pypdf2')
 makedepends=('python-setuptools')
 
 source=("https://github.com/mapnik/python-mapnik/archive/v$pkgver.tar.gz"
@@ -27,7 +29,7 @@ sha1sums=('8e30049954b14282667677a5d5a145eddedfc8df'
           '3a595137ebf04e96b18b672ce1aa0e20bcb72ee2')
 
 prepare() {
-    cd "$pkgname-$pkgver"
+    cd "python-mapnik-$pkgver"
     rm "src/mapnik_svg_generator_grammar.cpp"
     patch --forward --strip=1 --input="${srcdir}/package.patch"
     patch --forward --strip=1 --input="${srcdir}/proj6-apis.patch"
@@ -37,7 +39,7 @@ prepare() {
 }
 
 package() {
-	echo "Proj4 support is enabled, but requires a mapnik version where this is enabled as well."
+	echo "Proj support is enabled, but requires a mapnik version where this is enabled as well."
 	cd python-mapnik-$pkgver
 	export PYCAIRO_NO_IMPORT
 	python setup.py install --root="$pkgdir" --optimize=1
