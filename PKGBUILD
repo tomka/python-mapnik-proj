@@ -3,7 +3,7 @@
 
 pkgname=python-mapnik-proj
 pkgver=3.0.16
-pkgrel=3
+pkgrel=7
 
 pkgdesc="Python3 bindings for Mapnik with Proj support"
 url="https://github.com/mapnik/python-mapnik"
@@ -22,7 +22,8 @@ source=("https://github.com/mapnik/python-mapnik/archive/v$pkgver.tar.gz"
           "no-distutils.patch"
           "boost1.71.patch"
           "pyunicode.patch"
-          "python3.13.patch")
+          "python3.13.patch"
+          "boost1.89.patch")
 sha1sums=('8e30049954b14282667677a5d5a145eddedfc8df'
           'b85f58f54a3353fbb51df79ea4d337f3b299cac7'
           'da86ea6a077a0eee051342a8ac8dab72a3f0b5c0'
@@ -30,7 +31,8 @@ sha1sums=('8e30049954b14282667677a5d5a145eddedfc8df'
           '57272b7d7424c9f1b9650305738f46dd1d757348'
           '3a595137ebf04e96b18b672ce1aa0e20bcb72ee2'
           '97ebf65754f54f2587b24bc6521558e7c656cbd8'
-          'b965be0a0fddec8eccc2e18c0444a943461a7529')
+          'b965be0a0fddec8eccc2e18c0444a943461a7529'
+          '54e329a83524064abf34b414b0be813348d25d19')
 
 prepare() {
     cd "python-mapnik-$pkgver"
@@ -42,6 +44,7 @@ prepare() {
     patch --forward --strip=1 --input="${srcdir}/boost1.71.patch"
     patch --forward --strip=1 --input="${srcdir}/pyunicode.patch"
     patch --forward --strip=1 --input="${srcdir}/python3.13.patch"
+    patch --forward --strip=1 --input="${srcdir}/boost1.89.patch"
 }
 
 package() {

@@ -1,0 +1,11 @@
+--- a/setup.py
++++ b/setup.py
+@@ -50,7 +50,7 @@
+ 
+ 
+ def get_boost_library_names():
+-    wanted = ['boost_python', 'boost_thread', 'boost_system']
++    wanted = ['boost_python', 'boost_thread']
+     found = []
+     missing = []
+     for _id in wanted:
